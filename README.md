@@ -7,12 +7,13 @@ lives in `conekta-elements`, which publishes here on every release.
 
 ## Install
 
-Xcode: **File > Add Package Dependencies…**, paste `https://github.com/conekta/conekta-components-ios` and pick
-**Up to Next Major** from the version you want. Or in your `Package.swift`:
+Xcode: **File > Add Package Dependencies…**, paste `https://github.com/conekta/conekta-components-ios` and pick the
+version you want (**Exact Version** for a prerelease such as `1.1.0-beta`; **Up to Next Major** once a stable one is
+out). Or in your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/conekta/conekta-components-ios", from: "1.0.0"),
+    .package(url: "https://github.com/conekta/conekta-components-ios", exact: "1.1.0-beta"),
 ],
 targets: [
     .target(name: "YourApp", dependencies: [.product(name: "composeKit", package: "conekta-components-ios")]),
@@ -48,4 +49,5 @@ A complete app, built against this package on every release, is `examples/ios-sp
 ## Versions
 
 Each release `X.Y.Z` is the same version as the Android artifacts (`io.conekta.components:*`) and the web SDK
-(`conekta-js`). The XCFramework is signed by Conekta; Xcode verifies the signature when it resolves the package.
+(`conekta-js`); a prerelease (`1.1.0-beta`) is installed by exact version. The XCFramework ships with its privacy
+manifest; when a release is code-signed by Conekta, Xcode verifies the signature as it resolves the package.
