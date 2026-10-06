@@ -1,5 +1,5 @@
 // swift-tools-version:5.9
-// Written by the release workflow of conekta/conekta-elements (deploy.yml, job `deploy-xcframework`): every
+// Written by the release workflow of conekta/conekta-elements (deploy.yml, job `publish-ios`): every
 // release X.Y.Z of this repository carries `composeKit.xcframework.zip` and the checksum below points at it.
 // Do not edit by hand; the next release overwrites it.
 import PackageDescription
@@ -13,8 +13,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "composeKit",
-            url: "https://github.com/conekta/conekta-components-ios/releases/download/1.1.0-beta/composeKit.xcframework.zip",
-            checksum: "412a632ca7173b0d0807ab445ca02614eb0a5bfc859f80127f4f2ff5d2545666"
+            url: "https://github.com/conekta/conekta-components-ios/releases/download/1.1.0-beta.3/composeKit.xcframework.zip",
+            checksum: "0242ba030a539f7ec3b1d2125133dc20a4acc13732019c73f572e20b6bc5b8dd"
         ),
     ]
 )
