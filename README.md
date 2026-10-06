@@ -31,17 +31,40 @@ let session = PaymentSession(config: ComponentsConfig(publicKey: "key_…"))
 let controller = PaymentComponentController(session: session)
 session.load(orderId: order.id, clientSecret: order.checkout.clientSecret)
 
-// embed the component wherever your checkout lays it out
+// embed the component wherever your checkout lays it out: it does not scroll by itself, it publishes the height
+// its content needs as the view controller's `preferredContentSize`, so give it that height inside your scroll view
 struct PaymentComponentView: UIViewControllerRepresentable {
     let controller: PaymentComponentController
+    @Binding var height: CGFloat
+
+    func makeCoordinator() -> Coordinator { Coordinator(height: $height) }
+
     func makeUIViewController(context: Context) -> UIViewController {
-        PaymentComponentViewControllerKt.PaymentComponentViewController(controller: controller)
+        let vc = PaymentComponentViewControllerKt.PaymentComponentViewController(controller: controller)
+        context.coordinator.follow(vc)
+        return vc
     }
     func updateUIViewController(_ vc: UIViewController, context: Context) {}
+
+    final class Coordinator {
+        let height: Binding<CGFloat>
+        var observation: NSKeyValueObservation?
+        init(height: Binding<CGFloat>) { self.height = height }
+        func follow(_ vc: UIViewController) {
+            observation = vc.observe(\.preferredContentSize, options: [.initial, .new]) { [height] vc, _ in
+                DispatchQueue.main.async { height.wrappedValue = vc.preferredContentSize.height }
+            }
+        }
+    }
 }
 
-// your own pay button
-Button("Pagar") { controller.confirm() }
+// in your checkout
+@State private var componentHeight: CGFloat = 0
+ScrollView {
+    PaymentComponentView(controller: controller, height: $componentHeight)
+        .frame(height: max(componentHeight, 1))
+    Button("Pagar") { controller.confirm() }   // your own pay button
+}
 ```
 
 A complete app, built against this package on every release, is `examples/ios-spm` in `conekta-elements`.
