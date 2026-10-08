@@ -13,7 +13,7 @@ out). Or in your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/conekta/conekta-components-ios", exact: "1.1.0-beta.14"),
+    .package(url: "https://github.com/conekta/conekta-components-ios", exact: "1.1.0-beta.15"),
 ],
 targets: [
     .target(name: "YourApp", dependencies: [.product(name: "composeKit", package: "conekta-components-ios")]),
