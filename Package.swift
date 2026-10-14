@@ -13,8 +13,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "composeKit",
-            url: "https://github.com/conekta/conekta-components-ios/releases/download/1.1.0-beta.23/composeKit.xcframework.zip",
-            checksum: "bcaef1d52cc6f870b744e6ebd7dc5a2c04ab2384c3e79788a60f2ea35ae6c4b5"
+            url: "https://github.com/conekta/conekta-components-ios/releases/download/1.1.0-beta.24/composeKit.xcframework.zip",
+            checksum: "e0592cc98cbf2dfb921a1c39c824e56051e8109855bfdee669fc263d36130515"
         ),
     ]
 )
